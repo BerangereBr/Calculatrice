@@ -35,7 +35,8 @@ function App() {
         <Display value={display} />
         <Keypad appendToDisplay={appendDisplay}
           onClear={clearDisplay}
-          onEqual={onEqual} />
+          onEqual={onEqual}
+          deleteDisplay={deleteDisplay} />
       </div>
     </main>
   )

@@ -1,3 +1,5 @@
+import compute from "./compute"
+
 function valideExpression(e) {
     if (e.length === 0) return false
 
@@ -22,51 +24,24 @@ function calculate(expression) {
         }
         for (let i = 0; i < match.length; i++) {
             if ("+-/*".includes(match[i]) && "+-/*".includes(match[i + 1])) {
-                return false
+                return "Error"
             }
         }
         if (!valideExpression(match)) return "Error"
         while (match.length > 1) {
-            const op = match.findIndex(el => el === "/" || el === "*")
-            if (op != -1) {
-                const a = parseFloat(match[op - 1])
-                const b = parseFloat(match[op + 1])
-                const operator = match[op]
+            let op = match.findIndex(el => el === "/" || el === "*")
 
-                let result
-
-                if (operator === "/") {
-                    if (b === 0) return "Error"
-                    result = a / b
-                }
-                if (operator === "*") {
-                    result = a * b
-                }
-                match = [...match.slice(0, op - 1),
-                result.toString(),
-                ...match.slice(op + 2)
-                ]
+            if (op === -1) {
+                op = match.findIndex(el => el === "+" || el === "-")
             }
-            const nextOp = match.findIndex(el => el === "+" || el === "-")
-            if (nextOp != -1) {
-                const a = parseFloat(match[nextOp - 1])
-                const b = parseFloat(match[nextOp + 1])
-                const operator = match[nextOp]
-                let result
 
-                if (operator === "+") {
-                    result = a + b
-                }
-                if (operator === "-") {
-                    result = a - b
-                }
-                match = [...match.slice(0, nextOp - 1),
-                result.toString(),
-                ...match.slice(nextOp + 2)
-                ]
-            }
+            const a = parseFloat(match[op - 1])
+            const b = parseFloat(match[op + 1])
+            const operator = match[op]
+            const result = compute(a, b, operator)
+
+            match.splice(op - 1, 3, result.toString())
         }
-
         return Number(match[0])
     } catch {
         return "Error"
