@@ -31,7 +31,7 @@ function App() {
       <div className='flex justify-center md:justify-end w-[100%]'>
         <button onClick={toggle} className='border-2 border-gray-500 dark:border-gray-100 p-2 rounded-xl bg-gray-200 dark:bg-gray-600 md:mr-20 '><img src={dark ? sun : moon} alt={dark ? "sun" : "moon"} className='w-8 h-8' /></button>
       </div>
-      <div className="bg-gray-100 h-[80%] w-80 flex flex-col items-center justify-center gap-4 rounded-lg shadow-lg p-4 dark:bg-gray-800">
+      <div className="bg-white h-[75%] w-80 flex flex-col items-center justify-center gap-4 rounded-lg shadow-lg p-4 dark:bg-gray-700">
         <Display value={display} />
         <Keypad appendToDisplay={appendDisplay}
           onClear={clearDisplay}
